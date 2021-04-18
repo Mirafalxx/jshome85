@@ -8,7 +8,7 @@ const AlbumSchema = new mongoose.Schema({
   releaseDate: {
     type: String,
     requred: true,
-  },
+  },  
   artist: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist",

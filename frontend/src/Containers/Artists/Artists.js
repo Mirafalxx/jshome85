@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
-// import CircularProgress from "@material-ui/core/CircularProgress";
-// import makeStyles from "@material-ui/core/styles/makeStyles";
-import { useDispatch, useSelector } from "react-redux";
-import { Grid, Typography } from "@material-ui/core";
-import ArtistItem from "./ArtistItem";
-import { fetchArtists } from "../../store/slices/artistSlice";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Grid, Typography } from '@material-ui/core';
+import ArtistItem from './ArtistItem';
+import { fetchArtists } from '../../store/slices/artistSlice';
 
 const Artists = () => {
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists.artists);
-  console.log(artists);
   useEffect(() => {
     dispatch(fetchArtists());
   }, [dispatch]);
@@ -24,7 +21,7 @@ const Artists = () => {
 
       <Grid item container spacing={1}>
         {artists.map((artist) => (
-          <ArtistItem name={artist.name} key={artist._id} details={() => console.log("123")} />
+          <ArtistItem name={artist.name} key={artist._id} _id={artist._id} />
         ))}
       </Grid>
     </Grid>

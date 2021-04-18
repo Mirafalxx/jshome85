@@ -1,17 +1,13 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosApi from "../../axiosApi";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axiosApi from '../../axiosApi';
 
-export const fetchArtists = createAsyncThunk("artists/fetchArtists", async () => {
-  const response = await axiosApi.get("/artists");
+export const fetchArtists = createAsyncThunk('artists/fetchArtists', async () => {
+  const response = await axiosApi.get('/artists');
   return response.data;
 });
 
-export const fetchArtistAlbums = createAsyncThunk("album/fetchArtistAlbums", async () => {
-  const response = await axiosApi.get("/");
-});
-
 const artistSlice = createSlice({
-  name: "artists",
+  name: 'artists',
   initialState: {
     artists: [],
     loadingArtists: false,

@@ -6,11 +6,7 @@ const ArtistSchema = new mongoose.Schema({
     required: true,
   },
   information: String,
-  album: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Album",
-    required: true,
-  },
+  
 });
 
 const Artist = mongoose.model("Artist", ArtistSchema);
