@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   if (req.query.album) {
-    const tracks = await Track.find({ album: req.query.album }).populate('album', 'title').sort({ number: 1 });
+    const tracks = await Track.find({ album: req.query.album }).populate('album', 'title');
     return res.send(tracks);
   } else {
     const tracks = await Track.find().populate('album', 'title');

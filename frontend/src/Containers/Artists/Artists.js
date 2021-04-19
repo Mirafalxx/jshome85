@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import ArtistItem from './ArtistItem';
-import { fetchArtists } from '../../store/slices/artistSlice';
+import { fetchArtists } from '../../store/actions/artistsActions';
 
 const Artists = () => {
-  const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists.artists);
+
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchArtists());
   }, [dispatch]);

@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import { fetchTrack } from '../../store/slices/trackSlice';
 import TrackItem from './TrackItem';
+import { fetchTracks } from '../../store/actions/tracksAction';
 
 const Tracks = (props) => {
   const tracks = useSelector((state) => state.tracks.tracks);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTrack(props.match.params.id));
+    dispatch(fetchTracks(props.match.params.id));
   }, [dispatch, props.match.params.id]);
+  console.log(tracks);
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item container justify="space-between" alignItems="center">

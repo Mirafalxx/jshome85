@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import { fetchAlbums } from '../../store/slices/albumSlice';
 import AlbumItem from './AlbumItem';
+import { fetchAlbums } from '../../store/actions/albumsAction';
 
 const Albums = (props) => {
   const albums = useSelector((state) => state.albums.albums);
-  // const loadingAlbums = useSelector((state) => state.albums.loadingAlbums);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAlbums(props.match.params.id));
