@@ -8,6 +8,9 @@ import ListTracks from './Containers/Tracks/Tracks';
 import Login from './Containers/Login/Login';
 import Register from './Containers/Register/Register';
 import TrackHistory from './Containers/TrackHistory/TrackHistory';
+import ArtistForm from './Containers/Artists/ArtistForm/ArtistForm';
+import AlbumForm from './Containers/Albums/AlbumForm/AlbumForm';
+import TrackForm from './Containers/Tracks/TrackForm/TrackForm';
 
 const App = () => {
   return (
@@ -25,6 +28,9 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/track_history" component={TrackHistory} />
+            <Route path="/artists" component={ArtistForm} />
+            <Route path="/albums" component={AlbumForm} />
+            <Route path="/tracks" component={TrackForm} />
           </Switch>
         </Container>
       </main>

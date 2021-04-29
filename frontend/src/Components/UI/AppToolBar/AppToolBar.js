@@ -37,6 +37,30 @@ const AppToolbar = () => {
               </Typography>
             </Grid>
             <Grid item>
+              <Typography variant="h6">
+                <Link to="/artists" className={classes.mainLink}>
+                  Artists
+                </Link>
+              </Typography>
+            </Grid>
+
+            <Grid item>
+              <Typography variant="h6">
+                <Link to="/albums" className={classes.mainLink}>
+                  Albums
+                </Link>
+              </Typography>
+            </Grid>
+
+            <Grid item>
+              <Typography variant="h6">
+                <Link to="/tracks" className={classes.mainLink}>
+                  Tracks
+                </Link>
+              </Typography>
+            </Grid>
+
+            <Grid item>
               {user ? (
                 <Button component={Link} to="/track_history" color="inherit">
                   Track History
