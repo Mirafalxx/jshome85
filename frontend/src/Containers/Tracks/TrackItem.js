@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, Grid, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   card: {
@@ -13,17 +14,20 @@ const useStyles = makeStyles({
   },
 });
 
-const TrackItem = ({ title }) => {
+const TrackItem = ({ title, addToHistory }) => {
   const classes = useStyles();
+  const user = useSelector((state) => state.users.user);
   return (
     <Grid item xs sm md={6} lg={4}>
       <Card className={classes.card}>
         <CardHeader title={title} />
-        <CardActions>
-          <IconButton>
-            <ArrowForwardIcon />
-          </IconButton>
-        </CardActions>
+        {user ? (
+          <CardActions>
+            <IconButton onClick={addToHistory}>
+              <AddCircleIcon />
+            </IconButton>
+          </CardActions>
+        ) : null}
       </Card>
     </Grid>
   );

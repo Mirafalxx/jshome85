@@ -7,6 +7,7 @@ import ListAlbums from './Containers/Albums/Albums';
 import ListTracks from './Containers/Tracks/Tracks';
 import Login from './Containers/Login/Login';
 import Register from './Containers/Register/Register';
+import TrackHistory from './Containers/TrackHistory/TrackHistory';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/tracks/:id" component={ListTracks} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/track_history" component={TrackHistory} />
           </Switch>
         </Container>
       </main>

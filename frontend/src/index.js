@@ -11,12 +11,14 @@ import tracksReducer from './store/reducers/tracksReducer';
 import usersReducer from './store/reducers/usersReducer';
 import App from './App';
 import history from './history';
+import trackHistoryReducer from './store/reducers/trackHistoryReducer';
 
 const rootReducer = combineReducers({
   artists: artistsReducer,
   albums: albumsReducer,
   tracks: tracksReducer,
   users: usersReducer,
+  tracksHistory: trackHistoryReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

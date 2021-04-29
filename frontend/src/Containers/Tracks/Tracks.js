@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import TrackItem from './TrackItem';
 import { fetchTracks } from '../../store/actions/tracksAction';
+import { addTrackHistory } from '../../store/actions/trackHistoryActions';
 
 const Tracks = (props) => {
   const tracks = useSelector((state) => state.tracks.tracks);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Tracks = (props) => {
 
       <Grid item container spacing={1}>
         {tracks.map((track) => (
-          <TrackItem title={track.title} key={track._id} />
+          <TrackItem title={track.title} key={track._id} addToHistory={() => dispatch(addTrackHistory({ track }))} />
         ))}
       </Grid>
     </Grid>

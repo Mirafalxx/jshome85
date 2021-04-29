@@ -1,6 +1,6 @@
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Grid, Toolbar, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import AnonymusMenu from '../Menu/AnonymousMenu';
 import UserMenu from '../Menu/UserMenu';
@@ -35,6 +35,13 @@ const AppToolbar = () => {
                   Music API
                 </Link>
               </Typography>
+            </Grid>
+            <Grid item>
+              {user ? (
+                <Button component={Link} to="/track_history" color="inherit">
+                  Track History
+                </Button>
+              ) : null}
             </Grid>
             <Grid item>{user ? <UserMenu user={user} /> : <AnonymusMenu />}</Grid>
           </Grid>
