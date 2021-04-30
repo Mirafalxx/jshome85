@@ -23,7 +23,7 @@ const Tracks = (props) => {
 
       <Grid item container spacing={1}>
         {tracks.map((track) => (
-          <TrackItem title={track.title} key={track._id} addToHistory={() => dispatch(addTrackHistory({ track }))} />
+          <TrackItem name={track.name} key={track._id} addToHistory={() => dispatch(addTrackHistory({ track }))} />
         ))}
       </Grid>
     </Grid>

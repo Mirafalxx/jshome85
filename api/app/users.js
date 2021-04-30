@@ -4,7 +4,11 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const user = new User(req.body);
+    const userData = {
+      username: req.body.username,
+      password: req.body.password,
+    };
+    const user = new User(userData);
     user.generateToken();
     await user.save();
     return res.send(user);
@@ -29,5 +33,16 @@ router.post('/sessions', async (req, res) => {
   await user.save();
 
   return res.send({ message: 'Username and password correct!', user });
+});
+
+router.delete('/sessions', async (req, res) => {
+  const token = req.get('Authorization');
+  const success = { message: 'Success' };
+  if (!token) return res.send(success);
+  const user = await User.findOne({ token });
+  if (!user) return res.send(success);
+  user.token = '';
+  user.save();
+  return res.send(success);
 });
 module.exports = router;

@@ -21,7 +21,7 @@ const Albums = (props) => {
 
       <Grid item container spacing={1}>
         {albums.map((album) => (
-          <AlbumItem title={album.title} key={album._id} _id={album._id} />
+          <AlbumItem name={album.name} key={album._id} _id={album._id} />
         ))}
       </Grid>
     </Grid>

@@ -12,10 +12,37 @@ export const fetchAlbums = (artistID) => {
   return async (dispatch) => {
     try {
       dispatch(fetchAlbumsRequest());
-      const response = await axiosApi.get(`/albums/?artist=${artistID}`);
-      dispatch(fetchAlbumsSuccess(response.data));
+      if (artistID) {
+        const response = await axiosApi.get(`/albums/?artist=${artistID}`);
+        dispatch(fetchAlbumsSuccess(response.data));
+      } else {
+        const response = await axiosApi.get('/albums');
+        dispatch(fetchAlbumsSuccess(response.data));
+      }
     } catch (error) {
       dispatch(fetchAlbumsFailure());
+    }
+  };
+};
+
+// export const fetchAllAlbums = () => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(fetchAlbumsRequest());
+//       const response = await axiosApi.get(`/albums`);
+//       dispatch(fetchAlbumsSuccess(response.data));
+//     } catch (error) {
+//       dispatch(fetchAlbumsFailure());
+//     }
+//   };
+// };
+
+export const postAlbum = (albumData) => {
+  return async (dispatch) => {
+    await axiosApi.post('/albums', albumData);
+    try {
+    } catch (e) {
+      console.error('Error - ', e);
     }
   };
 };

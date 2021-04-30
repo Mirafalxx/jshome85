@@ -14,13 +14,13 @@ const useStyles = makeStyles({
   },
 });
 
-const TrackItem = ({ title, addToHistory }) => {
+const TrackItem = ({ name, addToHistory }) => {
   const classes = useStyles();
   const user = useSelector((state) => state.users.user);
   return (
     <Grid item xs sm md={6} lg={4}>
       <Card className={classes.card}>
-        <CardHeader title={title} />
+        <CardHeader title={name} />
         {user ? (
           <CardActions>
             <IconButton onClick={addToHistory}>

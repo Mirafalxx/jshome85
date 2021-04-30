@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import FormElement from '../../../Components/UI/Form/FormElement';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchArtists } from '../../../store/actions/artistsActions';
+import { postAlbum } from '../../../store/actions/albumsAction';
 
 const AlbumForm = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const AlbumForm = () => {
   const [album, setAlbum] = useState({
     title: '',
     releaseDate: '',
-    artists: '',
+    artist: '',
   });
   useEffect(() => {
     dispatch(fetchArtists());
@@ -23,7 +24,7 @@ const AlbumForm = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(album);
+    dispatch(postAlbum({ ...album }));
   };
   return (
     <form onSubmit={submitHandler}>
@@ -40,9 +41,9 @@ const AlbumForm = () => {
           select
           required
           label="Artist"
-          name="artists"
+          name="artist"
           onChange={inputChangeHandler}
-          value={album.artists}
+          value={album.artist}
           options={artists}
         />
         <Grid item xs>

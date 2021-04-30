@@ -1,17 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const TrackSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
   duration: String,
   album: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Album",
+    ref: 'Album',
     required: true,
   },
 });
 
-const Track = mongoose.model("Track", TrackSchema);
+const Track = mongoose.model('Track', TrackSchema);
 module.exports = Track;

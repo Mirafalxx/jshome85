@@ -11,13 +11,13 @@ const useStyles = makeStyles({
   },
 });
 
-const AlbumItem = ({ title, _id }) => {
+const AlbumItem = ({ name, _id }) => {
   const classes = useStyles();
   return (
     <>
       <Grid item xs sm md={6} lg={4} component={Link} to={'/tracks/' + _id} style={{ textDecoration: 'none' }}>
         <Card className={classes.card}>
-          <CardHeader title={title} />
+          <CardHeader title={name} />
         </Card>
       </Grid>
     </>
