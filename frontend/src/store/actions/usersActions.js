@@ -14,6 +14,7 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 const registerUserRequest = () => ({ type: REGISTER_USER_REQUEST });
 const registerUserSuccess = (user) => ({ type: REGISTER_USER_SUCCESS, user });
 const registerUserFailure = (error) => ({ type: REGISTER_USER_FAILURE, error });
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 const loginUserRequest = () => ({ type: LOGIN_USER_REQUEST });
 const loginUserSuccess = (user) => ({ type: LOGIN_USER_SUCCESS, user });
@@ -69,5 +70,16 @@ export const googleLogin = (googleData) => {
       dispatch(loginUserFailure(error.response.data));
       NotificationManager.error('Login Failed');
     }
+  };
+};
+
+export const logoutUser = () => {
+  return async (dispatch, getState) => {
+    const token = getState().users.user.token;
+
+    await axiosApi.delete('/users/sessions', { headers: { Authorization: token } });
+    dispatch({ type: LOGOUT_USER });
+    dispatch(historyPush('/'));
+    NotificationManager.success('Logged out!');
   };
 };
