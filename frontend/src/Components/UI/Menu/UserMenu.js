@@ -14,7 +14,7 @@ const UserMenu = ({ user }) => {
   return (
     <>
       <Button onClick={handleClick} color="inherit">
-        Hello, {user.username}!
+        Hello,{user}
       </Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem>Profile</MenuItem>

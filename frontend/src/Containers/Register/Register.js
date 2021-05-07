@@ -33,7 +33,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -68,13 +68,13 @@ const Register = () => {
         </Typography>
         <Grid container spacing={1} direction="column" component="form" onSubmit={submitFormHandler}>
           <FormElement
-            label="Username"
+            label="email"
             type="text"
             onChange={inputChangeHandler}
-            name="username"
-            value={user.username}
-            autoComplete="new-username"
-            error={getFieldError('username')}
+            name="email"
+            value={user.email}
+            autoComplete="new-email"
+            error={getFieldError('email')}
           />
 
           <FormElement

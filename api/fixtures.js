@@ -15,9 +15,7 @@ db.once('open', async () => {
   try {
     await db.dropCollection('albums');
     await db.dropCollection('artists');
-
     await db.dropCollection('tracks');
-
     await db.dropCollection('users');
   } catch (e) {
     console.log('Collections were not present, skipping drop...');
@@ -62,14 +60,16 @@ db.once('open', async () => {
   );
   await User.create(
     {
-      username: 'user',
+      email: 'user@music',
       password: 'user',
+      displayName: 'User',
       token: nanoid(),
       role: 'user',
     },
     {
-      username: 'admin',
+      email: 'admin@music',
       password: 'admin',
+      displayName: 'Admin',
       token: nanoid(),
       admin: 'admin',
       role: 'admin',

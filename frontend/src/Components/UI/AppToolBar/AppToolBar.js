@@ -67,7 +67,7 @@ const AppToolbar = () => {
                 </Button>
               ) : null}
             </Grid>
-            <Grid item>{user ? <UserMenu user={user} /> : <AnonymusMenu />}</Grid>
+            <Grid item>{user ? <UserMenu user={user.displayName} /> : <AnonymusMenu />}</Grid>
           </Grid>
         </Toolbar>
       </AppBar>

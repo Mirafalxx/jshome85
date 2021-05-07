@@ -7,6 +7,7 @@ import { loginUser } from '../../store/actions/usersActions';
 import FormElement from '../../Components/UI/Form/FormElement';
 import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
+import GoogleLogin from '../../Components/UI/GoogleLogin/GoogleLogin';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +35,7 @@ const Login = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [user, setUser] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const error = useSelector((state) => state.users.loginError);
@@ -66,13 +67,7 @@ const Login = () => {
               </Alert>
             </Grid>
           )}
-          <FormElement
-            label="Username"
-            type="text"
-            onChange={inputChangeHandler}
-            name="username"
-            value={user.username}
-          />
+          <FormElement label="email" type="text" onChange={inputChangeHandler} name="email" value={user.email} />
           <FormElement
             label="password"
             type="password"
@@ -84,6 +79,9 @@ const Login = () => {
             <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
               Sign in
             </Button>
+          </Grid>
+          <Grid item xs>
+            <GoogleLogin />
           </Grid>
           <Grid item container justify="flex-end">
             <Grid item>

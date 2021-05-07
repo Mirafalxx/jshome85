@@ -1,6 +1,7 @@
 import axios from '../../axiosApi';
 import { historyPush } from './historyActions';
 import { NotificationManager } from 'react-notifications';
+import axiosApi from '../../axiosApi';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -49,6 +50,24 @@ export const loginUser = (userData) => {
       } else {
         dispatch(loginUserFailure({ global: 'No internet' }));
       }
+    }
+  };
+};
+
+export const googleLogin = (googleData) => {
+  return async (dispatch) => {
+    try {
+      const body = {
+        tokenId: googleData.tokenId,
+        googleId: googleData.googleId,
+      };
+      const response = await axiosApi.post('/users/googleLogin', body);
+      dispatch(loginUserSuccess(response.data.user));
+      dispatch(historyPush('/'));
+      NotificationManager.success('Login Successful');
+    } catch (error) {
+      dispatch(loginUserFailure(error.response.data));
+      NotificationManager.error('Login Failed');
     }
   };
 };

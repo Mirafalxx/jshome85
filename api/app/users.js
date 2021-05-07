@@ -1,11 +1,14 @@
 const express = require('express');
 const User = require('../models/User');
 const router = express.Router();
-
+const config = require('../config');
+const { nanoid } = require('nanoid');
+const { OAuth2Client } = require('google-auth-library');
+const googleClient = new OAuth2Client(config.google.clientId);
 router.post('/', async (req, res) => {
   try {
     const userData = {
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
     };
     const user = new User(userData);
@@ -18,10 +21,10 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/sessions', async (req, res) => {
-  const user = await User.findOne({ username: req.body.username });
+  const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return res.status(401).send({ message: 'Username not found' });
+    return res.status(401).send({ message: 'email not found' });
   }
   const isMatch = await user.checkPassword(req.body.password);
 
@@ -32,7 +35,7 @@ router.post('/sessions', async (req, res) => {
   user.generateToken();
   await user.save();
 
-  return res.send({ message: 'Username and password correct!', user });
+  return res.send({ message: 'email and password correct!', user });
 });
 
 router.delete('/sessions', async (req, res) => {
@@ -45,4 +48,38 @@ router.delete('/sessions', async (req, res) => {
   user.save();
   return res.send(success);
 });
+
+router.post('/googleLogin', async (req, res) => {
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken: req.body.tokenId,
+      audience: process.env.CLIENT_ID,
+    });
+
+    const { name, email, sub: ticketUserId } = ticket.getPayload();
+
+    if (req.body.googleId !== ticketUserId) {
+      return res.status(401).send({ global: 'User ID incorrect' });
+    }
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      user = new User({
+        email,
+        password: nanoid(),
+        displayName: name,
+      });
+    }
+
+    user.generateToken();
+    await user.save();
+
+    res.send({ message: 'Success', user });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send({ global: 'Server error. Please try again.' });
+  }
+});
+
 module.exports = router;
